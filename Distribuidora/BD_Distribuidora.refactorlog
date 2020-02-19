@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="a0c1b004-737b-4137-a995-a55b710e1484" ChangeDateTime="02/19/2020 19:50:42">
+    <Property Name="ElementName" Value="[dbo].[Parametro].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Parametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdParametro" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="04a7ea58-d839-46df-b805-a65e76b6de19" ChangeDateTime="02/19/2020 19:52:05">
+    <Property Name="ElementName" Value="[dbo].[DetalleParametro].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DetalleParametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_DetalleParametro" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c3faa428-ebe1-4924-95da-086bda696ecd" ChangeDateTime="02/19/2020 19:52:11">
+    <Property Name="ElementName" Value="[dbo].[Parametro].[IdParametro]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Parametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_Parametro" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6ef72132-1e83-4ed4-92f1-c61bba1687fc" ChangeDateTime="02/19/2020 19:52:55">
+    <Property Name="ElementName" Value="[dbo].[DetalleParametro].[ValorNumero]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DetalleParametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DP_ValorNumero" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d6c194d4-5298-480f-bdef-716cc8e62842" ChangeDateTime="02/19/2020 19:53:02">
+    <Property Name="ElementName" Value="[dbo].[DetalleParametro].[fk_Parametro]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DetalleParametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DP_FK_Parametro" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8ec106c3-128f-4a12-b499-6d92a90ffd42" ChangeDateTime="02/19/2020 19:53:18">
+    <Property Name="ElementName" Value="[dbo].[DetalleParametro].[ValorString]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DetalleParametro]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DP_ValorString" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e279d315-fe32-4075-a809-94ed9e4ada8b" ChangeDateTime="02/19/2020 19:57:47">
+    <Property Name="ElementName" Value="[dbo].[FuncionalidadXPerfil].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FuncionalidadXPerfil]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_FuncionalidadXPerfil" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="34d14ad7-f117-4ded-8b1c-eb7d0f0320c2" ChangeDateTime="02/19/2020 20:00:01">
+    <Property Name="ElementName" Value="[dbo].[PerfilXRol].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PerfilXRol]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_PerfilXRol" />
+  </Operation>
+</Operations>
