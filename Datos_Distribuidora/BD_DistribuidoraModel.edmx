@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_DistribuidoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DetalleParametro">
+          <Key>
+            <PropertyRef Name="Id_DetalleParametro" />
+          </Key>
+          <Property Name="Id_DetalleParametro" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DP_FK_Parametro" Type="int" Nullable="false" />
+          <Property Name="DP_ValorNumero" Type="bigint" />
+          <Property Name="DP_ValorString" Type="varchar(max)" />
+          <Property Name="DP_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FuncionalidadXPerfil">
+          <Key>
+            <PropertyRef Name="Id_FuncionalidadXPerfil" />
+          </Key>
+          <Property Name="Id_FuncionalidadXPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_DetalleParametro_Perfil" Type="bigint" Nullable="false" />
+          <Property Name="FK_DetalleParametro_Funcionalidad" Type="bigint" Nullable="false" />
+          <Property Name="Estado_FuncionalidadXPerfil" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="Id_Parametro" />
+          </Key>
+          <Property Name="Id_Parametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Parametro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion_Parametro" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilXRol">
+          <Key>
+            <PropertyRef Name="Id_PerfilXRol" />
+          </Key>
+          <Property Name="Id_PerfilXRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_DetalleParametro_Rol" Type="bigint" Nullable="false" />
+          <Property Name="FK_DetalleParametro_Perfil" Type="bigint" Nullable="false" />
+          <Property Name="estado_PerfilXRol" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FK_DP_Rol" Type="bigint" Nullable="false" />
+          <Property Name="Correo_Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroCelular" Type="varchar" MaxLength="10" />
+          <Property Name="Cedula_Usuario" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="Pass_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DetalleParametro_ToParametro">
+          <End Role="Parametro" Type="Self.Parametro" Multiplicity="1" />
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametro">
+              <PropertyRef Name="Id_Parametro" />
+            </Principal>
+            <Dependent Role="DetalleParametro">
+              <PropertyRef Name="DP_FK_Parametro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FuncionalidadXPerfil_ToDetalleParametro">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="FuncionalidadXPerfil" Type="Self.FuncionalidadXPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="FuncionalidadXPerfil">
+              <PropertyRef Name="FK_DetalleParametro_Funcionalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FuncionalidadXPerfil_ToDetalleParametro2">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="FuncionalidadXPerfil" Type="Self.FuncionalidadXPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="FuncionalidadXPerfil">
+              <PropertyRef Name="Fk_DetalleParametro_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilXRol_ToDetalleParametro">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="PerfilXRol" Type="Self.PerfilXRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="PerfilXRol">
+              <PropertyRef Name="FK_DetalleParametro_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilXRol_ToDetalleParametro2">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="PerfilXRol" Type="Self.PerfilXRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="PerfilXRol">
+              <PropertyRef Name="FK_DetalleParametro_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_ToDetalleParametro">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="FK_DP_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_DistribuidoraModelStoreContainer">
+          <EntitySet Name="DetalleParametro" EntityType="Self.DetalleParametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuncionalidadXPerfil" EntityType="Self.FuncionalidadXPerfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametro" EntityType="Self.Parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerfilXRol" EntityType="Self.PerfilXRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetalleParametro_ToParametro" Association="Self.FK_DetalleParametro_ToParametro">
+            <End Role="Parametro" EntitySet="Parametro" />
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FuncionalidadXPerfil_ToDetalleParametro" Association="Self.FK_FuncionalidadXPerfil_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="FuncionalidadXPerfil" EntitySet="FuncionalidadXPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FuncionalidadXPerfil_ToDetalleParametro2" Association="Self.FK_FuncionalidadXPerfil_ToDetalleParametro2">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="FuncionalidadXPerfil" EntitySet="FuncionalidadXPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilXRol_ToDetalleParametro" Association="Self.FK_PerfilXRol_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="PerfilXRol" EntitySet="PerfilXRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilXRol_ToDetalleParametro2" Association="Self.FK_PerfilXRol_ToDetalleParametro2">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="PerfilXRol" EntitySet="PerfilXRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_ToDetalleParametro" Association="Self.FK_Usuarios_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_DistribuidoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DetalleParametro">
+          <Key>
+            <PropertyRef Name="Id_DetalleParametro" />
+          </Key>
+          <Property Name="Id_DetalleParametro" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DP_FK_Parametro" Type="Int32" Nullable="false" />
+          <Property Name="DP_ValorNumero" Type="Int64" />
+          <Property Name="DP_ValorString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DP_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Parametro" Relationship="Self.FK_DetalleParametro_ToParametro" FromRole="DetalleParametro" ToRole="Parametro" />
+          <NavigationProperty Name="Usuarios" Relationship="BD_DistribuidoraModel.FK_Usuarios_ToDetalleParametro" FromRole="DetalleParametro" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="FuncionalidadXPerfil">
+          <Key>
+            <PropertyRef Name="Id_FuncionalidadXPerfil" />
+          </Key>
+          <Property Name="Id_FuncionalidadXPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_DetalleParametro_Perfil" Type="Int64" Nullable="false" />
+          <Property Name="FK_DetalleParametro_Funcionalidad" Type="Int64" Nullable="false" />
+          <Property Name="Estado_FuncionalidadXPerfil" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DetalleParametro" Relationship="Self.FK_FuncionalidadXPerfil_ToDetalleParametro" FromRole="FuncionalidadXPerfil" ToRole="DetalleParametro" />
+          <NavigationProperty Name="DetalleParametro1" Relationship="Self.FK_FuncionalidadXPerfil_ToDetalleParametro2" FromRole="FuncionalidadXPerfil" ToRole="DetalleParametro" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="Id_Parametro" />
+          </Key>
+          <Property Name="Id_Parametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Parametro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_Parametro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilXRol">
+          <Key>
+            <PropertyRef Name="Id_PerfilXRol" />
+          </Key>
+          <Property Name="Id_PerfilXRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_DetalleParametro_Rol" Type="Int64" Nullable="false" />
+          <Property Name="FK_DetalleParametro_Perfil" Type="Int64" Nullable="false" />
+          <Property Name="estado_PerfilXRol" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DetalleParametro" Relationship="Self.FK_PerfilXRol_ToDetalleParametro" FromRole="PerfilXRol" ToRole="DetalleParametro" />
+          <NavigationProperty Name="DetalleParametro1" Relationship="Self.FK_PerfilXRol_ToDetalleParametro2" FromRole="PerfilXRol" ToRole="DetalleParametro" />
+        </EntityType>
+        <Association Name="FK_DetalleParametro_ToParametro">
+          <End Role="Parametro" Type="Self.Parametro" Multiplicity="1" />
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametro">
+              <PropertyRef Name="Id_Parametro" />
+            </Principal>
+            <Dependent Role="DetalleParametro">
+              <PropertyRef Name="DP_FK_Parametro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FuncionalidadXPerfil_ToDetalleParametro">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="FuncionalidadXPerfil" Type="Self.FuncionalidadXPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="FuncionalidadXPerfil">
+              <PropertyRef Name="FK_DetalleParametro_Funcionalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FuncionalidadXPerfil_ToDetalleParametro2">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="FuncionalidadXPerfil" Type="Self.FuncionalidadXPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="FuncionalidadXPerfil">
+              <PropertyRef Name="Fk_DetalleParametro_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilXRol_ToDetalleParametro">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="PerfilXRol" Type="Self.PerfilXRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="PerfilXRol">
+              <PropertyRef Name="FK_DetalleParametro_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilXRol_ToDetalleParametro2">
+          <End Role="DetalleParametro" Type="Self.DetalleParametro" Multiplicity="1" />
+          <End Role="PerfilXRol" Type="Self.PerfilXRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="PerfilXRol">
+              <PropertyRef Name="FK_DetalleParametro_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_DistribuidoraEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DetalleParametro" EntityType="Self.DetalleParametro" />
+          <EntitySet Name="FuncionalidadXPerfil" EntityType="Self.FuncionalidadXPerfil" />
+          <EntitySet Name="Parametro" EntityType="Self.Parametro" />
+          <EntitySet Name="PerfilXRol" EntityType="Self.PerfilXRol" />
+          <AssociationSet Name="FK_DetalleParametro_ToParametro" Association="Self.FK_DetalleParametro_ToParametro">
+            <End Role="Parametro" EntitySet="Parametro" />
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FuncionalidadXPerfil_ToDetalleParametro" Association="Self.FK_FuncionalidadXPerfil_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="FuncionalidadXPerfil" EntitySet="FuncionalidadXPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FuncionalidadXPerfil_ToDetalleParametro2" Association="Self.FK_FuncionalidadXPerfil_ToDetalleParametro2">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="FuncionalidadXPerfil" EntitySet="FuncionalidadXPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilXRol_ToDetalleParametro" Association="Self.FK_PerfilXRol_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="PerfilXRol" EntitySet="PerfilXRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilXRol_ToDetalleParametro2" Association="Self.FK_PerfilXRol_ToDetalleParametro2">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="PerfilXRol" EntitySet="PerfilXRol" />
+          </AssociationSet>
+          <EntitySet Name="Usuarios" EntityType="BD_DistribuidoraModel.Usuario" />
+          <AssociationSet Name="FK_Usuarios_ToDetalleParametro" Association="BD_DistribuidoraModel.FK_Usuarios_ToDetalleParametro">
+            <End Role="DetalleParametro" EntitySet="DetalleParametro" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_DP_Rol" Type="Int64" Nullable="false" />
+          <Property Name="Correo_Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCelular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula_Usuario" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="Pass_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Usuarios_ToDetalleParametro">
+          <End Type="BD_DistribuidoraModel.DetalleParametro" Role="DetalleParametro" Multiplicity="1" />
+          <End Type="BD_DistribuidoraModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleParametro">
+              <PropertyRef Name="Id_DetalleParametro" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="FK_DP_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_DistribuidoraModelStoreContainer" CdmEntityContainer="BD_DistribuidoraEntities1">
+          <EntitySetMapping Name="DetalleParametro">
+            <EntityTypeMapping TypeName="BD_DistribuidoraModel.DetalleParametro">
+              <MappingFragment StoreEntitySet="DetalleParametro">
+                <ScalarProperty Name="Id_DetalleParametro" ColumnName="Id_DetalleParametro" />
+                <ScalarProperty Name="DP_FK_Parametro" ColumnName="DP_FK_Parametro" />
+                <ScalarProperty Name="DP_ValorNumero" ColumnName="DP_ValorNumero" />
+                <ScalarProperty Name="DP_ValorString" ColumnName="DP_ValorString" />
+                <ScalarProperty Name="DP_Estado" ColumnName="DP_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuncionalidadXPerfil">
+            <EntityTypeMapping TypeName="BD_DistribuidoraModel.FuncionalidadXPerfil">
+              <MappingFragment StoreEntitySet="FuncionalidadXPerfil">
+                <ScalarProperty Name="Id_FuncionalidadXPerfil" ColumnName="Id_FuncionalidadXPerfil" />
+                <ScalarProperty Name="Fk_DetalleParametro_Perfil" ColumnName="Fk_DetalleParametro_Perfil" />
+                <ScalarProperty Name="FK_DetalleParametro_Funcionalidad" ColumnName="FK_DetalleParametro_Funcionalidad" />
+                <ScalarProperty Name="Estado_FuncionalidadXPerfil" ColumnName="Estado_FuncionalidadXPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametro">
+            <EntityTypeMapping TypeName="BD_DistribuidoraModel.Parametro">
+              <MappingFragment StoreEntitySet="Parametro">
+                <ScalarProperty Name="Id_Parametro" ColumnName="Id_Parametro" />
+                <ScalarProperty Name="Nombre_Parametro" ColumnName="Nombre_Parametro" />
+                <ScalarProperty Name="Descripcion_Parametro" ColumnName="Descripcion_Parametro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilXRol">
+            <EntityTypeMapping TypeName="BD_DistribuidoraModel.PerfilXRol">
+              <MappingFragment StoreEntitySet="PerfilXRol">
+                <ScalarProperty Name="Id_PerfilXRol" ColumnName="Id_PerfilXRol" />
+                <ScalarProperty Name="FK_DetalleParametro_Rol" ColumnName="FK_DetalleParametro_Rol" />
+                <ScalarProperty Name="FK_DetalleParametro_Perfil" ColumnName="FK_DetalleParametro_Perfil" />
+                <ScalarProperty Name="estado_PerfilXRol" ColumnName="estado_PerfilXRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BD_DistribuidoraModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Pass_Usuario" ColumnName="Pass_Usuario" />
+                <ScalarProperty Name="Cedula_Usuario" ColumnName="Cedula_Usuario" />
+                <ScalarProperty Name="NumeroCelular" ColumnName="NumeroCelular" />
+                <ScalarProperty Name="Correo_Usuario" ColumnName="Correo_Usuario" />
+                <ScalarProperty Name="FK_DP_Rol" ColumnName="FK_DP_Rol" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

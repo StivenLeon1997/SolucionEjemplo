@@ -58,14 +58,22 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tablas" />
+    <Folder Include="Datos Iniciales" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tablas\Parametro.sql" />
     <Build Include="Tablas\DetalleParametro.sql" />
     <Build Include="Tablas\FuncionalidadXPerfil.sql" />
     <Build Include="Tablas\PerfilXRol.sql" />
+    <Build Include="Tablas\Usuarios.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BD_Distribuidora.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Datos Iniciales\DatosIniciales.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
 </Project>

@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Id_PerfilXRol" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1056fb08-cf2c-4961-ab71-92ac9bd166a0" ChangeDateTime="02/19/2020 20:59:03">
+    <Property Name="ElementName" Value="[dbo].[Usuarios].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Usuarios]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdUsuario" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="42d06fe2-3006-41d4-b3bb-b045f3e7276d" ChangeDateTime="02/19/2020 21:01:57">
+    <Property Name="ElementName" Value="[dbo].[Usuarios].[Cedula]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Usuarios]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Cedula_Usuario" />
+  </Operation>
 </Operations>
